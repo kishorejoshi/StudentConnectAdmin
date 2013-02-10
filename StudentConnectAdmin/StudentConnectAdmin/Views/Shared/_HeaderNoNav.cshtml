@@ -1,0 +1,8 @@
+﻿@using StudentConnectAdmin.Utils
+@{ ViewBag.Title = Model; }
+<div>
+    @if (Roles.IsUserInRole("Admin")) { 
+        <a href="@Url.Action("Index", "Home")" rel="external" class="ui-btn-left" >Home</a>
+    }
+    <h1>@Model</h1>
+ </div>
