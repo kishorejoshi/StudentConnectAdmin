@@ -9,21 +9,10 @@ namespace StudentConnectAdmin.Data
     {
         public HomeViewModel()
         {
-            Metadata = new HomeMetadataViewModel();
-            Info = new ContactInfo();
+          List<ContactInfo>  Info = new List<ContactInfo>();
         }
 
-        public ContactInfo Info { get; set; }
-
-        public HomeMetadataViewModel Metadata { get; set; }
+        public List<ContactInfo> Info { get; set; }
     }
 
-    public sealed class HomeMetadataViewModel
-    {
-        public HomeMetadataViewModel()
-        {
-            Positions = new PositionItem[0];
-        }
-        public PositionItem[] Positions { get; set; }
-    }
 }

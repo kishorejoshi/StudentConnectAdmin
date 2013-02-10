@@ -13,5 +13,6 @@ using System.IO;
         IEnumerable<Position> GetPositions();
         void SaveContact(ContactInfo info);
         void SaveAttachment(string path, Stream stream);
+        IEnumerable<ContactInfo> GetSubmissions();
     }
 }

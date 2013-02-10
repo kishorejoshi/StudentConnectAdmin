@@ -24,7 +24,8 @@ namespace StudentConnectAdmin.Controllers
         [Authorize(Roles = "Standard, Admin")]
         public ActionResult Index()
         {
-            return View();
+            var model = repo.GetSubmissions();
+            return View(model);
         }
 
 

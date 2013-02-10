@@ -1,14 +1,29 @@
-﻿@{
-   
+﻿@model IEnumerable<StudentConnectAdmin.Data.ContactInfo>
+@{
+    ViewBag.Title = "Student Subissions"; 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div>
      @{ Html.RenderPartial("_Header", (string)ViewBag.Title); }
-     <h2>Student Submissions</h2>
      <p> Following are all the submissions from student connect portal
      </p>
      <div>
-        
+     @(Html.Telerik().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.FullName).Width(100);
+            columns.Bound(o => o.EmailAddress).Width(200);
+            columns.Bound(o => o.Major);
+            columns.Bound(o => o.GradYear).Width(120);
+            columns.Bound(o => o.Interests).Width(120);
+            
+        })
+        .Groupable()
+        .Sortable()
+        .Pageable()
+        .Filterable()
+        )
      </div>
 </div>

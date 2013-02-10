@@ -17,7 +17,7 @@ namespace StudentConnectAdmin.Azure
         readonly string _adminpassword;
         readonly string _adminuser;
         readonly string _standarduser;
-        readonly string _standardupassword;
+        readonly string _standardpassword;
 
         readonly CloudBlobClient client;
 
@@ -26,7 +26,7 @@ namespace StudentConnectAdmin.Azure
         public StorageHelper()
         {
             
-            _adminuser = "sd-administrator";
+            _adminuser = "administrator";
             _standarduser = "standard-student";
 
             try
@@ -62,6 +62,7 @@ namespace StudentConnectAdmin.Azure
         public string AdminPassword { get { return this._adminpassword; } }
         public string AdminUsername { get { return this._adminuser; } }
         public string StandardUsername { get { return this._standarduser; } }
+        public string StandardPassword { get { return this._standardpassword; } }
 
         public SchoolData[] Schools { get { return this._schools; } }
 
@@ -163,6 +164,47 @@ namespace StudentConnectAdmin.Azure
                 }
                 
             }
+        }
+
+        public List<string> GetAllRequesterId()
+        {
+            List<string> requesterIDList = new List<string>();
+            var dir = client.GetContainerReference("studentconnect-submissions");
+
+            IEnumerable<IListBlobItem> blodList = dir.ListBlobs();
+            if (blodList.Any())
+            {
+                foreach (IListBlobItem item in blodList)
+                {
+                    var path = item.Uri.AbsolutePath.Split('/').Last();
+                    if(!path.Contains(".pdf"))
+                        requesterIDList.Add(path.ToString());
+                }
+            }
+
+            return requesterIDList;
+        }
+
+        public List<ContactInfo> GetAllSubmission()
+        {
+            List<ContactInfo> submissionList = new List<ContactInfo>();
+            var dir = client.GetContainerReference("studentconnect-submissions");
+
+            var requesterIDList = this.GetAllRequesterId();
+            foreach (string requesterID in requesterIDList)
+            {
+                var submissions = dir.GetBlobReferenceFromServer(requesterID);
+                var xml = submissions.DownloadText();
+                var ser = new XmlSerializer(typeof(RequesterSubmissions));
+                RequesterSubmissions rs;
+                using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(xml.ToCharArray())))
+                {
+                    rs = (RequesterSubmissions)ser.Deserialize(ms);
+                    // submit
+                    submissionList.Add(rs.Submissions.Last());
+                }
+            }
+            return submissionList;
         }
     }
 }

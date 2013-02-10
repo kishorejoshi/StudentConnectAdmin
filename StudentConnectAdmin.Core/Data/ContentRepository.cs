@@ -84,5 +84,11 @@ namespace StudentConnectAdmin.Data
         {
             store.AddRequesterAttachment(path, stream);
         }
+
+        public IEnumerable<ContactInfo> GetSubmissions()
+        {
+            return store.GetAllSubmission();
+        }
     }
+
 }
