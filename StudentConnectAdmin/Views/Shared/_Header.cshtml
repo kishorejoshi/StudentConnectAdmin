@@ -1,0 +1,17 @@
+﻿@using StudentConnectAdmin.Utils
+@{ ViewBag.Title = "Student Connect Admin"; }
+<div >
+     @if (Roles.IsUserInRole("Admin"))
+     {
+		@(Html.Telerik().Menu().Name("menu")
+            .Items(menu =>
+            {
+                menu.Add().Text("Student List").Action("Index", "Home");
+                menu.Add().Text("Schools").Action("About", "Home");
+            }))
+                    
+        <a href="@Url.Action("Logout", "Account")" rel="external" class="ui-btn-right" style="margin-right:32px;" >Logout</a>
+     }
+         <h1>@Model</h1> 
+       
+</div>
