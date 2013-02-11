@@ -177,7 +177,7 @@ namespace StudentConnectAdmin.Azure
                 foreach (IListBlobItem item in blodList)
                 {
                     var path = item.Uri.AbsolutePath.Split('/').Last();
-                    if(!path.Contains(".pdf"))
+                    if(!path.Contains("."))
                         requesterIDList.Add(path.ToString());
                 }
             }
@@ -201,7 +201,7 @@ namespace StudentConnectAdmin.Azure
                 {
                     rs = (RequesterSubmissions)ser.Deserialize(ms);
                     // submit
-                    submissionList.Add(rs.Submissions.Last());
+                    submissionList.Add(rs.Submissions.OrderBy(q=>q.LastUpdated).Last());
                 }
             }
             return submissionList;
