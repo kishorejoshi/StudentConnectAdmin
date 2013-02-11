@@ -298,3 +298,31 @@ div#title
 {
     width: 6em;
 }
+
+.loginContainer
+{
+    margin:auto;
+    width: 50%;
+}
+.errormessage
+{
+  color:Red;  
+  height:35px;
+}
+
+.loginfields
+{
+    height:45px;
+    font-weight:bold;
+}
+
+.loginSubmit
+{
+    height:25px;
+    width:150px;
+}
+
+#menu
+{
+    text-align:left !important;
+}

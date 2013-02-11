@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<StudentConnectAdmin.Data.ContactInfo>
 @{
-    ViewBag.Title = "Student Subissions"; 
+    ViewBag.Title = "Student Submissions"; 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,16 +14,25 @@
         .Columns(columns =>
         {
             columns.Bound(o => o.FullName).Width(100);
-            columns.Bound(o => o.EmailAddress).Width(200);
+            columns.Bound(o => o.School);
             columns.Bound(o => o.Major);
-            columns.Bound(o => o.GradYear).Width(120);
-            columns.Bound(o => o.Interests).Width(120);
+            columns.Bound(o => o.GradYear);
+            columns.Bound(o => o.EmailAddress);
+            columns.Bound(o => o.PhoneNumber);
+            columns.Bound(o => o.Interests);
+            columns.Bound(o => o.About);
+            columns.Bound(o => o.JobType);
+            columns.Bound(o => o.LastUpdated);
+            columns.Bound(o => o.PreferredContactMethod);
+            columns.Bound(o => o.UploadKey).Title("Resume").Template(@<text><a href="http://sdshare.blob.core.windows.net/studentconnect-submissions/@item.UploadKey">Resume</a> </text>);
+            
             
         })
         .Groupable()
         .Sortable()
         .Pageable()
         .Filterable()
+        .Scrollable()
         )
      </div>
 </div>

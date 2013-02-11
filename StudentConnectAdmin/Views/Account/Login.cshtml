@@ -2,18 +2,19 @@
    
 }
 
-<h2>Login</h2>
+
 <div>
-     @{ Html.RenderPartial("_Header", (string)ViewBag.Title); }
+    @{ Html.RenderPartial("_Header", (string)ViewBag.Title); }
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
-        <div>
-            <div>
+        <div class= "loginContainer">
+            <h2>Login</h2>
+            <div class="loginfields">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" value=""/> 
             </div>
 
-            <div>
+            <div class="loginfields">
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" value="" />                
             </div>
@@ -21,7 +22,7 @@
             <div class="errormessage">@ViewBag.AuthError</div>
             
             <div>
-            <input type="submit" value="Login" name="login" id="login" />
+            <input type="submit" value="Login" name="login" id="login" class="loginSubmit" />
             </div>
         </div>
     }

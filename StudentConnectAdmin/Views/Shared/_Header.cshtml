@@ -7,10 +7,8 @@
             .Items(menu =>
             {
                 menu.Add().Text("Student Submissions").Action("Index", "Home");
-                menu.Add().Text("Schools").Action("About", "Home");
+                menu.Add().Text("Logout").Action("Logout", "Account");
             }))
-                    
-        <a href="@Url.Action("Logout", "Account")" rel="external" class="ui-btn-right" style="margin-right:32px;" >Logout</a>
      }
          <h1>@Model</h1> 
        
