@@ -23,8 +23,19 @@ namespace StudentConnectAdmin.Controllers
         [Authorize(Roles = "Standard, Admin")]
         public ActionResult Index()
         {
-            var model = repo.GetSubmissions();
-            return View(model);
+            var model = new StatisticsViewModel();
+            model.Info = new List<JobTypePercent>();
+            var submissions = repo.GetSubmissions();
+            float total = submissions.Select(q => q.Interests).Count();
+            foreach (var interest in submissions.Select(q => q.Interests).Distinct())
+            {
+                var obj = new JobTypePercent();
+                obj.Source = interest;
+                obj.Percentage = (submissions.Count(q => q.Interests.Equals(interest))/total) * 100 ;
+                model.Info.Add(obj);
+            }
+
+            return View(model.Info);
         }
 
         [Authorize(Roles = "Standard, Admin")]

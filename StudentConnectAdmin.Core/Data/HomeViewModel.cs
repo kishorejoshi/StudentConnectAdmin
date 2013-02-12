@@ -5,14 +5,19 @@ using System.Text;
 
 namespace StudentConnectAdmin.Data
 {
-    public sealed class HomeViewModel
+    public sealed class StatisticsViewModel
     {
-        public HomeViewModel()
+        public StatisticsViewModel()
         {
-          List<ContactInfo>  Info = new List<ContactInfo>();
+            List<JobTypePercent> Info = new List<JobTypePercent>();
         }
 
-        public List<ContactInfo> Info { get; set; }
+        public List<JobTypePercent> Info { get; set; }
     }
 
+    public class JobTypePercent
+    {
+        public string Source { get; set; }
+        public float Percentage { get; set; }
+    }
 }
