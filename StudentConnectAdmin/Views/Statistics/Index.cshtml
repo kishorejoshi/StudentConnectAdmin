@@ -1,0 +1,42 @@
+﻿@model IEnumerable<StudentConnectAdmin.Data.ContactInfo>
+@{
+    ViewBag.Title = "Statistics"; 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+     @{ Html.RenderPartial("_Header", (string)ViewBag.Title); }
+     <div>
+    @(Html.Telerik().Chart(Model)
+    .Name("chart")
+    .Title(title => title
+        .Text("School vs Job Type")
+        .Visible(ViewBag.ShowTitle)
+    )
+    .Legend(legend => legend
+        .Position(ViewBag.LegendPosition)
+        .Visible(ViewBag.ShowLegend)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Column().Stack(ViewBag.Stack);
+    })
+    .Series(series =>
+    {
+        if (ViewBag.SeriesType == "column")
+        {
+            series.Column(s => s.School).Name("School");
+        }
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.JobType)
+    )
+    .ValueAxis(axis => axis
+        .Numeric().Labels(labels => labels.Format("${0:#,##0}"))
+    )
+    )
+    .HtmlAttributes(new { style = "width: 600px; height: 400px;" })
+)
+     </div>
+</div>
+

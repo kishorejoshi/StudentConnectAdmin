@@ -35,7 +35,7 @@ namespace StudentConnectAdmin.Azure
                 var acct = CloudStorageAccount.Parse(connstring);
                 client = acct.CreateCloudBlobClient();
                 var dir = client.GetContainerReference("studentconnect");
-                var adminpwd = dir.GetBlobReferenceFromServer("_adminpassword");
+               var adminpwd = dir.GetBlobReferenceFromServer("_adminpassword");
                 // If you get a 403 - Forbidden warning here, its because you dont have access to SD's Azure Storage account.
                 // Get your own FREE here.  http://www.windowsazure.com/en-us/pricing/free-trial/
                 var adminpwdText = adminpwd.DownloadText();

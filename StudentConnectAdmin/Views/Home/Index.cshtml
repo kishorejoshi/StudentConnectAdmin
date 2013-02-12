@@ -11,6 +11,7 @@
      <div>
      @(Html.Telerik().Grid(Model)
         .Name("Grid")
+        .ColumnContextMenu()
         .Columns(columns =>
         {
             columns.Bound(o => o.FullName).Width(100);
@@ -33,6 +34,7 @@
         .Pageable()
         .Filterable()
         .Scrollable(c=>c.Height("500px"))
+        .Reorderable(reorder => reorder.Columns(true))
         )
      </div>
 </div>
