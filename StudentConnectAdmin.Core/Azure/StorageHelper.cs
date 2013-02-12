@@ -195,14 +195,18 @@ namespace StudentConnectAdmin.Azure
             {
                 var submissions = dir.GetBlobReferenceFromServer(requesterID);
                 var xml = submissions.DownloadText();
-                var ser = new XmlSerializer(typeof(RequesterSubmissions));
-                RequesterSubmissions rs;
-                using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(xml.ToCharArray())))
+                if (!string.IsNullOrEmpty(xml))
                 {
-                    rs = (RequesterSubmissions)ser.Deserialize(ms);
-                    // submit
-                    submissionList.Add(rs.Submissions.OrderBy(q=>q.LastUpdated).Last());
+                    var ser = new XmlSerializer(typeof(RequesterSubmissions));
+                    RequesterSubmissions rs;
+                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(xml.ToCharArray())))
+                    {
+                        rs = (RequesterSubmissions)ser.Deserialize(ms);
+                        // submit
+                        submissionList.Add(rs.Submissions.OrderBy(q => q.LastUpdated).Last());
+                    }
                 }
+                
             }
             return submissionList;
         }

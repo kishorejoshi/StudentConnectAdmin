@@ -326,3 +326,7 @@ div#title
 {
     text-align:left !important;
 }
+
+.t-grid td {
+    border-bottom: 1px solid #ddd !important;
+}
